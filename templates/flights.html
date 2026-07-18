@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Available Flights - Ellaine Sky High Airlines
+{% endblock %}
+
+{% block content %}
+
+<section class="feature">
+
+    <h2>Available Flights</h2>
+
+    {% if flights %}
+
+    <table>
+
+        <tr>
+            <th>Flight No.</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departure</th>
+            <th>Seats Available</th>
+            <th>Fare</th>
+            <th>Book</th>
+        </tr>
+
+        {% for flight in flights %}
+
+        <tr>
+
+            <td>{{ flight.flight_number }}</td>
+
+            <td>{{ flight.origin }}</td>
+
+            <td>{{ flight.destination }}</td>
+
+            <td>{{ flight.departure_time.strftime("%d %b %Y %I:%M %p") }}</td>
+
+            <td>{{ flight.available_seats }}</td>
+
+            <td>${{ "%.2f"|format(flight.price) }}</td>
+
+            <td>
+
+                {% if current_user.is_authenticated and current_user.role != "admin" %}
+
+                    {% if flight.available_seats > 0 %}
+
+                    <a href="{{ url_for('add_to_cart', flight_id=flight.id) }}"
+                       class="button">
+                        Book Flight
+                    </a>
+
+                    {% else %}
+
+                    Sold Out
+
+                    {% endif %}
+
+                {% else %}
+
+                    -
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+        <p>No flights are currently available.</p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
