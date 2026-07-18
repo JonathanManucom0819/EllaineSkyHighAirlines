@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Bookings - Ellaine Sky High Airlines
+{% endblock %}
+
+{% block content %}
+
+<section class="feature">
+
+    <h2>My Bookings</h2>
+
+    {% if bookings %}
+
+        {% for booking in bookings %}
+
+        <div class="booking-card">
+
+            <div class="booking-header">
+
+                <div>
+
+                    <h3>✈ Booking Reference: ESH{{ "%05d"|format(booking.id) }}</h3>
+
+                    <p class="booking-date">
+
+                        Booked on
+                        {{ booking.booking_date.strftime("%A, %d %B %Y • %I:%M %p") }}
+
+                    </p>
+
+                </div>
+
+                <span class="booking-status">
+
+                    ✓ Ticket Confirmed
+
+                </span>
+
+            </div>
+
+            <table>
+
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Route</th>
+                    <th>Fare</th>
+                </tr>
+
+                {% for item in booking.items %}
+
+                <tr>
+
+                    <td>{{ item.flight.flight_number }}</td>
+
+                    <td>
+
+                        {{ item.flight.origin }}
+                        →
+                        {{ item.flight.destination }}
+
+                    </td>
+
+                    <td>
+
+                        ${{ "%.2f"|format(item.price) }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+            <div class="booking-total">
+
+                Total Booking Cost
+
+                <span>
+
+                    ${{ "%.2f"|format(booking.items | sum(attribute='price')) }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>You have not made any bookings yet.</p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

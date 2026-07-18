@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Flight
+{% endblock %}
+
+{% block content %}
+
+<section class="feature">
+
+<h2>Add Flight</h2>
+
+<form method="POST">
+
+{{ form.hidden_tag() }}
+
+<p>
+    {{ form.flight_number.label }}<br>
+    {{ form.flight_number(size=30) }}
+
+    <small class="help-text">
+        Example: ESH 101
+    </small>
+
+    {% for error in form.flight_number.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>
+    {{ form.origin.label }}<br>
+    {{ form.origin(size=30) }}
+
+    {% for error in form.origin.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>
+    {{ form.destination.label }}<br>
+    {{ form.destination(size=30) }}
+
+    {% for error in form.destination.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>
+    {{ form.departure_time.label }}<br>
+    {{ form.departure_time(size=30) }}
+
+    {% for error in form.departure_time.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>
+    {{ form.available_seats.label }}<br>
+    {{ form.available_seats(size=30) }}
+
+    {% for error in form.available_seats.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>
+    {{ form.price.label }}<br>
+    {{ form.price(size=30) }}
+
+    {% for error in form.price.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+</p>
+
+<p>{{ form.submit(class="button") }}</p>
+
+</form>
+
+</section>
+
+{% endblock %}

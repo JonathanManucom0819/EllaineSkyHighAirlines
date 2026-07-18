@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register - Ellaine Sky High Airlines
+{% endblock %}
+
+{% block content %}
+
+<section class="feature">
+
+    <h2>Create an Account</h2>
+
+    <p>
+        Register to start booking flights.
+    </p>
+
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.full_name.label }}<br>
+            {{ form.full_name(size=40) }}
+        </p>
+
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=40) }}
+        </p>
+
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=40) }}
+        </p>
+
+        <p>
+            {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password(size=40) }}
+        </p>
+
+        <p>
+            {{ form.submit(class="button") }}
+        </p>
+
+    </form>
+
+</section>
+
+{% endblock %}

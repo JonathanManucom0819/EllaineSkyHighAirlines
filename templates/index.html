@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - Ellaine Sky High Airlines
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-overlay">
+
+        <h2>Your Next Journey Starts Here</h2>
+
+        <p>
+
+            Discover safe, comfortable, and reliable flights
+            connecting New Zealand with destinations across
+            New Zealand and around the world.
+
+        </p>
+
+        <a href="{{ url_for('flights') }}"
+           class="button">
+
+            View Available Flights
+
+        </a>
+
+    </div>
+
+</section>
+
+<section class="home-features">
+
+    <div class="feature-card">
+
+        <div class="feature-icon">✈</div>
+
+        <h3>Easy Booking</h3>
+
+        <p>
+
+            Search flights, manage your booking,
+            and confirm your trip in just a few clicks.
+
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon">🌏</div>
+
+        <h3>Global Connections</h3>
+
+        <p>
+
+            Connecting New Zealand with destinations
+            across Australia and around the world.
+
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon">⭐</div>
+
+        <h3>Premium Service</h3>
+
+        <p>
+
+            Experience comfort, reliability,
+            and exceptional customer service
+            on every journey.
+
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
