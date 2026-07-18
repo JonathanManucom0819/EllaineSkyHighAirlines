@@ -1,4 +1,7 @@
 from functools import wraps
+import os
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, render_template, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -9,8 +12,8 @@ from forms import RegistrationForm, LoginForm, FlightForm
 app = Flask(__name__)
 
 # Application configuration
-app.config["SECRET_KEY"] = "ellaine-sky-high-secret-key"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///airline.db"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY","ellaine-sky-high-secret-key")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL","sqlite:///airline.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Initialize database
@@ -74,7 +77,6 @@ class Flight(db.Model):
         lazy=True
     )
 
-
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(
@@ -100,7 +102,6 @@ class Booking(db.Model):
         cascade="all, delete-orphan"
     )
 
-
 class BookingItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     booking_id = db.Column(
@@ -122,7 +123,6 @@ class BookingItem(db.Model):
         db.Float,
         nullable=False
     )
-
 
 # -------------------------
 # Routes
@@ -570,4 +570,8 @@ if __name__ == "__main__":
             db.session.add_all(sample_flights)
             db.session.commit()
 
-    app.run(debug=True)
+    app.run(
+    host="0.0.0.0",
+    port=int(os.environ.get("PORT", 5000)),
+    debug=True
+)
