@@ -10,6 +10,12 @@ My Bookings - Ellaine Sky High Airlines
 
     <h2>My Bookings</h2>
 
+        <p class="page-subtitle">
+
+            View your confirmed flight reservations and travel details.
+
+        </p>
+
     {% if bookings %}
 
         {% for booking in bookings %}
@@ -75,16 +81,17 @@ My Bookings - Ellaine Sky High Airlines
 
             <div class="booking-total">
 
-                Total Booking Cost
+                <span>Total Fare</span>
 
                 <span>
 
-                    ${{ "%.2f"|format(booking.items | sum(attribute='price')) }}
+                    ${{ "%.2f"|format(
+                        booking.items | sum(attribute='price')
+                    ) }}
 
                 </span>
 
             </div>
-
         </div>
 
         {% endfor %}
